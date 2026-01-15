@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I LOVE YOU TO INFINITY & BEYOND FOREVER</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: white;
+      background: linear-gradient(45deg, #ff004c, #ff3366, #ff6699, #ff99cc, #ff6699, #ff3366);
+      background-size: 400% 400%;
+      animation: gradientFlow 18s ease infinite;
+      position: relative;
+      cursor: pointer;
+      padding-bottom: 320px;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px 100px;
+      text-align: center;
+      z-index: 10;
+    }
+    h1 {
+      font-size: clamp(5rem, 16vw, 16rem);
+      font-weight: 900;
+      line-height: 0.85;
+      text-transform: uppercase;
+      letter-spacing: -6px;
+      background: linear-gradient(90deg, #fff, #ffeb3b, #fff, #ffeb3b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 80px #ff004c, 0 0 160px #ff3366;
+      animation: glow 3s ease-in-out infinite alternate, pulseScale 4s infinite;
+      margin: 0.4em 0;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 40px #ff004c, 0 0 100px #ff3366; }
+      to { text-shadow: 0 0 120px #ff004c, 0 0 240px #ff3366, 0 0 360px #ff6699; }
+    }
+    @keyframes pulseScale {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .subtitle {
+      font-size: clamp(2.8rem, 9vw, 7rem);
+      margin: 20px 0 60px;
+      color: #fff;
+      text-shadow: 0 0 40px #ff3366;
+      animation: heartbeat 2s infinite;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .message {
+      max-width: 920px;
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      line-height: 1.55;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 2s ease;
+      margin: 40px 0 100px;
+    }
+    .message.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .separator {
+      width: 80%;
+      max-width: 400px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff3366, transparent);
+      margin: 60px auto 40px;
+      position: relative;
+    }
+    .separator::after {
+      content: "♡";
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 0 0 15px #ff3366;
+    }
+
+    .custom-message-section {
+      max-width: 800px;
+      width: 90%;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .custom-message-section label {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      margin-bottom: 20px;
+      display: block;
+      text-shadow: 0 0 20px #ff3366;
+    }
+    textarea#personalMessage {
+      width: 100%;
+      min-height: 160px;
+      padding: 20px;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: white;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 51, 102, 0.5);
+      border-radius: 16px;
+      resize: vertical;
+      outline: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 32px rgba(255, 0, 76, 0.25);
+    }
+    textarea#personalMessage:focus {
+      border-color: #ff3366;
+      box-shadow: 0 0 30px rgba(255, 51, 102, 0.6);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    textarea#personalMessage::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .floating-words {
+      position: absolute;
+      color: rgba(255,255,255,0.7);
+      font-size: 2rem;
+      font-weight: bold;
+      pointer-events: none;
+      animation: floatUp 12s linear infinite;
+      text-shadow: 0 0 20px #ff3366;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(-10deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(10deg); opacity: 0; }
+    }
+    .falling-heart, .falling-petal {
+      position: absolute;
+      pointer-events: none;
+      font-size: 3rem;
+      animation: fall linear infinite;
+      z-index: 5;
+    }
+    .falling-heart { color: #fff; text-shadow: 0 0 20px #ff3366; }
+    .falling-petal { color: #ffcccc; filter: drop-shadow(0 0 15px #ff6699); }
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(110vh) rotate(1440deg); opacity: 0; }
+    }
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 70%);
+      animation: sparkle 8s infinite alternate;
+      z-index: 6;
+    }
+    @keyframes sparkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.85; }
+    }
+  </style>
+</head>
+<body onclick="explodeConfetti()">
+
+<div class="container">
+  <h1>I LOVE YOU</h1>
+  <div class="subtitle">TO INFINITY ♾️ AND BEYOND</div>
+  
+  <div class="message" id="loveMessage">
+    My beautiful girl<br><br>
+    You are the reason my heart beats so loud.<br>
+    Every sunrise reminds me of your smile.<br>
+    Every star reminds me of your eyes.<br>
+    You are my safe place, my wildest dream,<br>
+    My favorite hello and hardest goodbye.<br><br>
+    I choose you  today  tomorrow and in every lifetime.<br>
+    Forever isnt long enough when its with you.<br><br>
+    <span style="font-size:1.7em">I LOVE YOU</span><br>
+    more than words  more than time more than anything.<br><br>
+    — Yathaarth ❤️❤️❤️
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="custom-message-section">
+    <label for="personalMessage">I love you so much  ♡</label>
+    <textarea id="personalMessage" placeholder="Hey baby i am sorry for hurting you so much but you are my everything  💕 "></textarea>
+  </div>
+</div>
+
+<div class="sparkles"></div>
+
+<script>
+// Fixed typewriter that preserves HTML tags like <br>
+const message = document.getElementById('loveMessage');
+const originalHTML = message.innerHTML;
+message.innerHTML = '';
+
+let charIndex = 0;
+let isInTag = false;
+let currentTag = '';
+
+function typeWriter() {
+  if (charIndex < originalHTML.length) {
+    const char = originalHTML.charAt(charIndex);
+
+    if (char === '<') {
+      isInTag = true;
+      currentTag = '<';
+    } else if (char === '>' && isInTag) {
+      isInTag = false;
+      currentTag += '>';
+      message.innerHTML += currentTag;
+      currentTag = '';
+    } else if (isInTag) {
+      currentTag += char;
+    } else {
+      message.innerHTML += char;
+    }
+
+    charIndex++;
+    setTimeout(typeWriter, 35);
+  } else {
+    message.classList.add('visible');
+  }
+}
+setTimeout(typeWriter, 1500);
+
+// Floating words
+const words = ["Forever", "Soulmate", "My Everything", "Always", "You & Me", "♾️", "❤️", "Home"];
+function createFloatingWord() {
+  const word = document.createElement('div');
+  word.className = 'floating-words';
+  word.textContent = words[Math.floor(Math.random() * words.length)];
+  word.style.left = Math.random() * 100 + 'vw';
+  word.style.top = Math.random() * document.body.scrollHeight + 'px';
+  word.style.animationDuration = (Math.random() * 8 + 10) + 's';
+  word.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+  document.body.appendChild(word);
+  setTimeout(() => word.remove(), 15000);
+}
+setInterval(createFloatingWord, 1200);
+
+// Falling hearts & petals
+function createFalling() {
+  const item = document.createElement('div');
+  item.className = Math.random() > 0.4 ? 'falling-heart' : 'falling-petal';
+  item.innerHTML = Math.random() > 0.5 ? '❤️' : '🌸';
+  item.style.left = Math.random() * 100 + 'vw';
+  item.style.top = '-10vh';
+  item.style.animationDuration = (Math.random() * 10 + 8) + 's';
+  item.style.fontSize = (Math.random() * 2 + 2) + 'rem';
+  document.body.appendChild(item);
+  setTimeout(() => item.remove(), 20000);
+}
+setInterval(createFalling, 200);
+
+// Confetti on click
+function explodeConfetti() {
+  for (let i = 0; i < 150; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.position = 'fixed';
+    confetti.style.width = '12px';
+    confetti.style.height = '12px';
+    confetti.style.background = ['#ff004c','#ff3366','#ffff00','#ff69b4','#00ffff'][Math.floor(Math.random()*5)];
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.top = Math.random() * 100 + 'vh';
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    confetti.style.pointerEvents = 'none';
+    confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(confetti);
+    
+    const anim = confetti.animate([
+      { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+      { transform: `translateY(${Math.random()*800-400}px) translateX(${Math.random()*600-300}px) rotate(${Math.random()*1440-720}deg)`, opacity: 0 }
+    ], {
+      duration: Math.random() * 2000 + 1500,
+      easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)'
+    });
+    anim.onfinish = () => confetti.remove();
+  }
+}
+
+window.onload = () => {
+  setTimeout(explodeConfetti, 800);
+};
+</script>
+</body>
+</html>
